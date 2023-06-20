@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Students page</title>
+    <style>
+        table{
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            border-collapse: collapse;
+            background-color: antiquewhite;
+            width: 100%;
+        }
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 10px;
+        }
+        tr:nth-child(even) {
+		background-color: #ffe44b;
+	    }
+        nav{
+            display: flex;
+            justify-content: space-between;
+        }
+        input[type="search"]{
+            width: 30%;
+            border: 1px solid grey;
+            padding: 5px 10px;
+            border-radius: 50px;
+            height: 6vh;
+        }
+    </style>
+  </head>
+  <body>
+    <nav>
+    <h1>Students data</h1>
+    <input type="search" placeholder="search for student here..." id="search-bar">
+    </nav>
+    <table>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Student Id</th>
+        <th>Students class</th>
+        <th>Books issued</th>
+      </tr>
+      <% data.forEach(element=> { %>
+      <tr>
+        <td><%= element.firstName %></td>
+        <td><%= element.secondName %></td>
+        <td><%= element.schoolId %></td>
+        <td><%= element.studentClass %></td>
+        <td><%= element.bookIssued %></td>
+      </tr>
+      <% }) %>
+    </table>
+    <form action="/students" method="post">
+        <input type="text" name="firstName" placeholder="student first name..">
+        <input type="text" name="secondName" placeholder="student second or last name">
+        <input type="text" name="schoolId" placeholder="students school id number">
+        <input type="text" name="studentClass" placeholder="students class">
+        <input type="text" name="BooksIssued" placeholder="books issued">
+        <button type=""submit>Add Student</button>
+    </form>
+  </body>
+</html>

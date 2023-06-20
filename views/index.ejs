@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>BooksRoom</title>
+</head>
+<style>
+	table {
+		font-family: arial, sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+        position: absolute;
+        top: 15%;
+        width: 70%;
+        float: right;
+        margin: 0 28%;
+	}
+
+	td,
+	th {
+		border: 1px solid #dddddd;
+		text-align: left;
+		padding: 8px;
+	}
+
+	tr:nth-child(even) {
+		background-color: #000000;
+	}
+    table{
+        background-color: rgb(51, 66, 116);
+        color: #fff;
+        font-family: sans-serif;
+    }
+    /* form{
+        display: flex;
+        flex-direction: column;
+        margin: 10px auto;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+        padding: 10px;
+        border:  1.5px solid #3333;
+        width: 50%;
+    }
+    form > input[type="text"],input[type="submit"]{
+        width: 90%;
+        height: 6vh;
+        margin: 5px auto;
+    }
+    form h1{
+        color: #000;
+        text-align: center;
+        font-size: 45px;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    } */
+    .issue{
+        padding: 10px;
+        width: 100%;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 20px;
+        cursor: pointer;
+        background-color: rgb(108, 240, 108);
+    }
+    .delete{
+        padding: 10px;
+        width: 100%;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 20px;
+        cursor: pointer;
+        background-color: rgb(238, 78, 78);
+    }
+    .return{
+        padding: 10px;
+        width: 100%;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 20px;
+        cursor: pointer;
+        background-color: rgb(247, 247, 53);
+    }
+    .add--book{
+        width: 25%;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+        background-color: #fff;
+        margin: 0 10px;
+    }
+    .add--book h1{
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 45px;
+        font-weight: 200;
+        text-align: center;
+    }
+    .add--book input[type="text"]{
+        width: 95%;
+        height: 6vh;
+        margin: 10px 0;
+    }
+    .add--book::placeholder{
+        font-size: 18px;
+    }
+    body{
+        background-color: aliceblue;
+    }
+    .add--book--btn{
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 50px;
+        background-color: #000000;
+        color: #fff;
+        border: 1px solid grey;
+        font-size: 18px;
+    }
+    .add--book--btn:hover{
+        background-color: #fff;
+        color: #000;
+        transform: scale(0.9);
+        cursor: pointer;
+        transition: 0.5s ease-in-out;
+    }
+    nav{
+        display: flex;
+        justify-content: space-between;
+        height: 80px;
+        padding: 0  80px;
+    }
+    .nav{
+        display: flex;
+        margin: 10px 0;
+    }
+    .nav li{
+        padding: 5px 20px;
+        font-size: 18px;
+        list-style: none;
+    }
+    .nav li{
+        cursor: pointer;
+    }
+</style>
+
+<body>
+    <nav>
+	<h1>All Books</h1>
+    <div class="nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/students">Students</a></li>
+        <li>Books</li>
+    </div>
+    </nav>
+	<table>
+		<tr>
+			<th>Book Name</th>
+			<th>Book Author</th>
+			<th>Book Pages</th>
+			<th>Book Price</th>
+			<th>Book Availability</th>
+			<th>Issue</th>
+			<th>Return</th>
+			<th>Delete</th>
+		</tr>
+		<% data.forEach(element=> { %>
+			<tr>
+				<td>
+					<%= element.bookName %>
+				</td>
+				<td>
+					<%= element.bookAuthor %>
+				</td>
+				<td>
+					<%= element.bookPages %>
+				</td>
+				<td>
+					<%= element.bookPrice %>
+				</td>
+				<td>
+					<%= element.bookState %>
+				</td>
+                <td>
+                    <form action="/issue" method="post">
+                        <input type="text" style="display: none;" 
+                               name="bookName" 
+                               value="<%= element.bookName %>">
+                        <button type="submit" class="issue">Issue</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="/return" method="post">
+                        <input type="text" style="display: none;" 
+                               name="bookName" 
+                               value="<%= element.bookName %>">
+                        <button type="submit" class="return">Return</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="/delete" method="post">
+                        <input type="text" style="display: none;" 
+                               name="bookName" 
+                               value="<%= element.bookName %>">
+                        <button type="submit" class="delete">Delete</button>
+                    </form>
+                </td>
+			</tr>
+            </form>
+			<% }) %>
+
+	</table>
+    <form action="/" method="POST" class="add--book">
+        <h1>Add a Book here</h1>
+       <input type="text"  id="input" name="bookName" placeholder="Enter BookName here..">
+       <input type="text"  id="input" name="bookAuthor" placeholder="BookAuthor here...">
+       <input type="text"  id="input" name="bookPages" placeholder="Enter BookPages here....">
+       <input type="text"  id="input" name="bookPrice" placeholder="Enter BookPrice here.....">
+       <input type="submit" value="AddBook" class="add--book--btn">
+    </form>
+    <!-- <form action="/issue" method="post">
+       <input type="text" style="display: none;" name="bookName"/>
+       <input type="submit" value="IssueBook">
+    </form> -->
+
+</html>
